@@ -12,6 +12,7 @@ class TasksServices extends GetxController {
   RxList<dynamic> importantTasks = [].obs;
   RxList<dynamic> upcomingTasks = [].obs;
   RxList<dynamic> myDayTasks = [].obs;
+  RxList<dynamic> progressMyDayTasks = [].obs;
 
   RxMap<Category, List<dynamic>> filteredTasksWithCategory = {
     Category.personal: [],
@@ -39,6 +40,8 @@ class TasksServices extends GetxController {
     myDayTasks.value = getTasksInCurrentDay(tasks);
 
     updateFilteredUpcomingTaskOnDaySelected(filterDate.value, filterDate.value);
+
+    progressMyDayTasks.value = filterNotCompletedTasks(myDayTasks);
   }
 
   Future<int> insertTask({
@@ -145,6 +148,10 @@ class TasksServices extends GetxController {
       return tasks.where((task) => task!.important == 1).toList();
     } else
       return [];
+  }
+
+  List<dynamic> filterNotCompletedTasks(List<dynamic> tasks) {
+    return tasks.where((task) => task.completed == 0).toList();
   }
 
   List<dynamic> getUpcomingTasks(tasks) {

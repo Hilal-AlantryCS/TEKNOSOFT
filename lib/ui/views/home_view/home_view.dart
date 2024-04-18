@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teknosoft/core/data/modules/task.dart';
-import 'package:teknosoft/core/enums/text_style_type.dart';
 import 'package:teknosoft/ui/shared/colors.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_category_details.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_floating_add.dart';
@@ -10,6 +9,7 @@ import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/utils.dart';
 import 'package:teknosoft/ui/views/important_task_view/important_task_view.dart';
 import 'package:teknosoft/ui/views/my_day_task_view/my_day_task_view.dart';
+import 'package:teknosoft/ui/views/search_view/search_view.dart';
 import 'package:teknosoft/ui/views/upcoming_task_view/upcoming_task_view.dart';
 
 const List<IconData> categryIcon = [
@@ -31,6 +31,43 @@ class HomeView extends StatelessWidget {
             return ListView(
               children: [
                 Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            "lists",
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Get.to(SearchView());
+                            },
+                            icon: Icon(
+                              Icons.search,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          CircularProgressIndicator(
+                            value: tasksServices.progressMyDayTasks.length /
+                                tasksServices.myDayTasks.length,
+                          ),
+                          CustomText(
+                            "Today\'s Progress ",
+                          ),
+                          CustomText(
+                            "${tasksServices.progressMyDayTasks.length} tasks left",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
                   margin: EdgeInsetsDirectional.all(screenWidth(20)),
                   padding: EdgeInsetsDirectional.all(screenWidth(20)),
                   decoration: BoxDecoration(
@@ -47,9 +84,7 @@ class HomeView extends StatelessWidget {
                           Get.to(MyDayTaskView());
                         },
                       ),
-                      Divider(
-                        height: 0,
-                      ),
+                      Divider(height: 0),
                       CustomListTileButton(
                         title: "Upcoming",
                         subTitle: "${tasksServices.upcomingTasks.length} tasks",
@@ -58,9 +93,7 @@ class HomeView extends StatelessWidget {
                           Get.to(UpcomingTaskView());
                         },
                       ),
-                      Divider(
-                        height: 0,
-                      ),
+                      Divider(height: 0),
                       CustomListTileButton(
                         title: "Important",
                         subTitle:

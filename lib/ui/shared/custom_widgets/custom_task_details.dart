@@ -111,6 +111,7 @@ class CustomTaskDetails extends StatelessWidget {
                       completed: myTask.completed - 1,
                     );
                   }
+                  print("${myTask.completed}");
                 },
               ),
               Column(
