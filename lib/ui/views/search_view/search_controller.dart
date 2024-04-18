@@ -4,20 +4,23 @@ import 'package:teknosoft/ui/shared/utils.dart';
 
 class MySearchController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
-  RxList<dynamic> tasks = <dynamic>[].obs;
+  RxList<dynamic> filtertask = [].obs;
   RxList<dynamic> searchTasks = [].obs;
 
   @override
   void onInit() {
-    tasks.addAll(tasksServices.tasks);
+    tasksServices.tasks.forEach((element) {
+      filtertask.add(element);
+    });
+    // filtertask.addAll(tasksServices.tasks);
     super.onInit();
   }
 
   void searchByString(String search) {
     if (search.isEmpty) {
-      searchTasks.value = tasks;
+      searchTasks = filtertask;
     } else {
-      searchTasks.value = tasks
+      searchTasks.value = filtertask
           .where((element) => element.title
               .toString()
               .toLowerCase()

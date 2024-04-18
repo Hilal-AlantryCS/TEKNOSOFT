@@ -5,6 +5,7 @@ import 'package:teknosoft/core/enums/text_style_type.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_task_details.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text_field.dart';
+import 'package:teknosoft/ui/shared/utils.dart';
 import 'package:teknosoft/ui/views/search_view/search_controller.dart';
 
 class SearchView extends StatelessWidget {
@@ -27,15 +28,18 @@ class SearchView extends StatelessWidget {
           () {
             return ListView(
               children: [
-                Container(
+                Padding(
+                  padding: EdgeInsetsDirectional.all(screenWidth(20)),
                   child: CustomTextFormField(
+                    onChanged: (value) {
+                      controller.searchByString(value);
+                    },
                     controller: controller.searchController.value,
                     label: "Search",
                   ),
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
                   itemCount: controller.searchTasks.length,
                   itemBuilder: (context, index) {
                     Task myTask = controller.searchTasks[index];

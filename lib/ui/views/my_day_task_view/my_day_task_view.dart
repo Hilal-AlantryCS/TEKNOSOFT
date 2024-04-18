@@ -23,7 +23,6 @@ class MyDayTaskView extends StatelessWidget {
           () {
             return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemCount: tasksServices.myDayTasks.length,
               itemBuilder: (context, index) {
                 Task myTask = tasksServices.myDayTasks[index];

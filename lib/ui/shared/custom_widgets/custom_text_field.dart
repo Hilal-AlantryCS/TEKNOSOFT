@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final TextStyle? hintStyle;
   final TextStyle? style;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   const CustomTextFormField({
     super.key,
@@ -21,11 +22,13 @@ class CustomTextFormField extends StatelessWidget {
     this.style,
     this.validator,
     required this.label,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: controller,
       validator: validator,
       maxLines: maxLines,

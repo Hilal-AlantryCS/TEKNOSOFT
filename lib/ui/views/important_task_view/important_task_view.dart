@@ -23,7 +23,6 @@ class ImportantView extends StatelessWidget {
           () {
             return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemCount: tasksServices.importantTasks.length,
               itemBuilder: (context, index) {
                 Task myTask = tasksServices.importantTasks[index];

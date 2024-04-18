@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teknosoft/core/data/modules/task.dart';
+import 'package:teknosoft/core/enums/text_style_type.dart';
 import 'package:teknosoft/ui/shared/colors.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_category_details.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_floating_add.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_list_tile_button.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/utils.dart';
+import 'package:teknosoft/ui/views/home_view/home_controller.dart';
 import 'package:teknosoft/ui/views/important_task_view/important_task_view.dart';
 import 'package:teknosoft/ui/views/my_day_task_view/my_day_task_view.dart';
 import 'package:teknosoft/ui/views/search_view/search_view.dart';
@@ -24,13 +26,17 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.put(HomeController());
     return SafeArea(
       child: Scaffold(
         body: Obx(
           () {
             return ListView(
               children: [
-                Container(
+                Padding(
+                  padding: EdgeInsetsDirectional.all(
+                    screenWidth(20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -46,21 +52,29 @@ class HomeView extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.search,
+                              size: screenWidth(10),
                             ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          CircularProgressIndicator(
-                            value: tasksServices.progressMyDayTasks.length /
-                                tasksServices.myDayTasks.length,
+                          SizedBox(
+                            width: screenWidth(20),
+                            height: screenWidth(20),
+                            child: CircularProgressIndicator(
+                              value: controller.todayProgress.value,
+                              backgroundColor: AppColors.greyColor,
+                              color: AppColors.blueColor,
+                            ),
                           ),
                           CustomText(
-                            "Today\'s Progress ",
+                            "  Today\'s Progress ",
+                            type: TextStyleType.SMALL,
                           ),
                           CustomText(
                             "${tasksServices.progressMyDayTasks.length} tasks left",
+                            type: TextStyleType.SMALL,
                           ),
                         ],
                       ),
