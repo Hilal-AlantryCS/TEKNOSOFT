@@ -28,11 +28,18 @@ class UpcomingTaskView extends StatelessWidget {
           ),
           centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.more_vert,
-              ),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                controller.filterType.value = value;
+              },
+              itemBuilder: (BuildContext context) {
+                return {'All Upcoming', 'filter in day'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
             ),
           ],
         ),
@@ -73,13 +80,47 @@ class UpcomingTaskView extends StatelessWidget {
                     controller.onDaySelected(selectedDay, focusedDay);
                   },
                 ),
-                SizedBox(height: screenWidth(20)),
+                Padding(
+                  padding: EdgeInsetsDirectional.all(
+                    screenWidth(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomText(
+                        controller.filterType.value,
+                        type: TextStyleType.SUBTITLE,
+                      ),
+                      DropdownButton<String>(
+                        // hint: Text('Please choose a category'),
+                        value: controller.filterType.value,
+                        items: {'All Upcoming', 'filter in day'}
+                            .map((String choice) {
+                          return DropdownMenuItem<String>(
+                            value: choice,
+                            child: CustomText(
+                              choice,
+                              type: TextStyleType.BODY,
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (choice) {
+                          controller.filterType.value = choice!;
+                        },
+                      )
+                    ],
+                  ),
+                ),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: tasksServices.filterTask.length,
+                  itemCount: controller.filterType.value == "All Upcoming"
+                      ? tasksServices.upcomingTasks.length
+                      : tasksServices.filterTask.length,
                   itemBuilder: (context, index) {
-                    Task myTask = tasksServices.filterTask[index];
+                    Task myTask = controller.filterType.value == "All Upcoming"
+                        ? tasksServices.upcomingTasks[index]
+                        : tasksServices.filterTask[index];
                     return CustomTaskDetails(myTask: myTask);
                   },
                 ),

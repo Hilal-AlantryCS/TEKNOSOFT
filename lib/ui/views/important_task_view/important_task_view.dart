@@ -6,8 +6,8 @@ import 'package:teknosoft/ui/shared/custom_widgets/custom_task_details.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/utils.dart';
 
-class MyDayTaskView extends StatelessWidget {
-  const MyDayTaskView({super.key});
+class ImportantView extends StatelessWidget {
+  const ImportantView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class MyDayTaskView extends StatelessWidget {
             return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: tasksServices.myDayTasks.length,
+              itemCount: tasksServices.importantTasks.length,
               itemBuilder: (context, index) {
-                Task myTask = tasksServices.myDayTasks[index];
+                Task myTask = tasksServices.importantTasks[index];
                 return CustomTaskDetails(myTask: myTask);
               },
             );

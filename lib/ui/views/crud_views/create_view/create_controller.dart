@@ -33,7 +33,7 @@ class CreateController extends GetxController {
           dateTime.month,
           dateTime.day,
           selectEndDate.value.hour,
-          selectEndDate.value.minute,
+          selectEndDate.value.minute + 1,
         );
         // final selIOS =
         //     DateFormat('dd-MMM-yyyy - HH:mm').format(selectStartDate.value);

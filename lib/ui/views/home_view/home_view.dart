@@ -5,8 +5,10 @@ import 'package:teknosoft/core/enums/text_style_type.dart';
 import 'package:teknosoft/ui/shared/colors.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_category_details.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_floating_add.dart';
+import 'package:teknosoft/ui/shared/custom_widgets/custom_list_tile_button.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/utils.dart';
+import 'package:teknosoft/ui/views/important_task_view/important_task_view.dart';
 import 'package:teknosoft/ui/views/my_day_task_view/my_day_task_view.dart';
 import 'package:teknosoft/ui/views/upcoming_task_view/upcoming_task_view.dart';
 
@@ -37,66 +39,36 @@ class HomeView extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      InkWell(
+                      CustomListTileButton(
+                        title: "My Day",
+                        subTitle: "${tasksServices.myDayTasks.length} tasks",
+                        icon: Icons.sunny,
                         onTap: () {
                           Get.to(MyDayTaskView());
                         },
-                        child: ListTile(
-                          title: CustomText(
-                            "My Day",
-                            type: TextStyleType.SUBTITLE,
-                            textColor: AppColors.blueColor,
-                          ),
-                          subtitle: CustomText(
-                            "${tasksServices.myDayTasks.length} tasks",
-                            type: TextStyleType.SMALL,
-                          ),
-                          leading: Icon(
-                            Icons.sunny,
-                            color: AppColors.blueColor,
-                          ),
-                        ),
                       ),
                       Divider(
                         height: 0,
                       ),
-                      InkWell(
+                      CustomListTileButton(
+                        title: "Upcoming",
+                        subTitle: "${tasksServices.upcomingTasks.length} tasks",
+                        icon: Icons.calendar_month_outlined,
                         onTap: () {
                           Get.to(UpcomingTaskView());
                         },
-                        child: ListTile(
-                          title: CustomText(
-                            "Upcoming",
-                            type: TextStyleType.SUBTITLE,
-                            textColor: AppColors.blueColor,
-                          ),
-                          subtitle: CustomText(
-                            "${tasksServices.upcomingTasks.length} tasks",
-                            type: TextStyleType.SMALL,
-                          ),
-                          leading: Icon(
-                            Icons.sunny,
-                            color: AppColors.blueColor,
-                          ),
-                        ),
                       ),
                       Divider(
                         height: 0,
                       ),
-                      ListTile(
-                        title: CustomText(
-                          "Important",
-                          type: TextStyleType.SUBTITLE,
-                          textColor: AppColors.blueColor,
-                        ),
-                        subtitle: CustomText(
-                          "${tasksServices.importantTasks.length} tasks",
-                          type: TextStyleType.SMALL,
-                        ),
-                        leading: Icon(
-                          Icons.sunny,
-                          color: AppColors.blueColor,
-                        ),
+                      CustomListTileButton(
+                        title: "Important",
+                        subTitle:
+                            "${tasksServices.importantTasks.length} tasks",
+                        icon: Icons.star,
+                        onTap: () {
+                          Get.to(ImportantView());
+                        },
                       ),
                     ],
                   ),

@@ -4,6 +4,7 @@ import 'package:teknosoft/ui/shared/utils.dart';
 
 class UpcomingTaskController extends GetxController {
   Rx<DateTime> filterDate = DateTime.now().obs;
+  Rx<String> filterType = "All Upcoming".obs;
 
   datePickerWidget(BuildContext context) async {
     filterDate.value = await showDatePicker(
