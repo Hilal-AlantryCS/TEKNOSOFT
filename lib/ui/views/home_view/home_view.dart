@@ -80,11 +80,20 @@ class HomeView extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(height: screenWidth(20)),
+                      Divider(
+                        thickness: 2,
+                        height: 0,
+                        indent: screenWidth(20),
+                        endIndent: screenWidth(20),
+                      ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsetsDirectional.all(screenWidth(20)),
+                  margin: EdgeInsetsDirectional.symmetric(
+                    horizontal: screenWidth(20),
+                  ),
                   padding: EdgeInsetsDirectional.all(screenWidth(20)),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
