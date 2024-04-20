@@ -8,7 +8,6 @@ import 'package:teknosoft/ui/shared/custom_widgets/custom_floating_add.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_list_tile_button.dart';
 import 'package:teknosoft/ui/shared/custom_widgets/custom_text.dart';
 import 'package:teknosoft/ui/shared/utils.dart';
-import 'package:teknosoft/ui/views/home_view/home_controller.dart';
 import 'package:teknosoft/ui/views/important_task_view/important_task_view.dart';
 import 'package:teknosoft/ui/views/my_day_task_view/my_day_task_view.dart';
 import 'package:teknosoft/ui/views/search_view/search_view.dart';
@@ -26,7 +25,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeController controller = Get.put(HomeController());
     return SafeArea(
       child: Scaffold(
         body: Obx(
@@ -45,6 +43,8 @@ class HomeView extends StatelessWidget {
                         children: [
                           CustomText(
                             "lists",
+                            type: TextStyleType.TITLE,
+                            textSize: screenWidth(15),
                           ),
                           IconButton(
                             onPressed: () {
@@ -63,17 +63,19 @@ class HomeView extends StatelessWidget {
                             width: screenWidth(20),
                             height: screenWidth(20),
                             child: CircularProgressIndicator(
-                              value: controller.todayProgress.value,
+                              value: tasksServices.todayProgress.value,
                               backgroundColor: AppColors.greyColor,
                               color: AppColors.blueColor,
                             ),
                           ),
                           CustomText(
                             "  Today\'s Progress ",
-                            type: TextStyleType.SMALL,
+                            textColor: AppColors.blueColor,
+                            type: TextStyleType.BODY,
                           ),
                           CustomText(
                             "${tasksServices.progressMyDayTasks.length} tasks left",
+                            textColor: AppColors.greyColor,
                             type: TextStyleType.SMALL,
                           ),
                         ],

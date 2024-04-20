@@ -26,7 +26,7 @@ class SearchView extends StatelessWidget {
         ),
         body: Obx(
           () {
-            return ListView(
+            return Column(
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.all(screenWidth(20)),
@@ -38,13 +38,14 @@ class SearchView extends StatelessWidget {
                     label: "Search",
                   ),
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.searchTasks.length,
-                  itemBuilder: (context, index) {
-                    Task myTask = controller.searchTasks[index];
-                    return CustomTaskDetails(myTask: myTask);
-                  },
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.searchTasks.length,
+                    itemBuilder: (context, index) {
+                      Task myTask = controller.searchTasks[index];
+                      return CustomTaskDetails(myTask: myTask);
+                    },
+                  ),
                 ),
               ],
             );

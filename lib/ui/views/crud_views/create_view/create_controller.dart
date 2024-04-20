@@ -76,7 +76,7 @@ class CreateController extends GetxController {
           context: Get.context!,
           dialogType: DialogType.error,
           animType: AnimType.rightSlide,
-          title: "The Task Title is empty",
+          title: "The Start date is after End date",
         )..show();
       } else {
         AwesomeDialog(

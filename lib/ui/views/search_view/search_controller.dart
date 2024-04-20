@@ -9,8 +9,10 @@ class MySearchController extends GetxController {
 
   @override
   void onInit() {
+    filtertask.clear();
     tasksServices.tasks.forEach((element) {
       filtertask.add(element);
+      searchTasks.add(element);
     });
     // filtertask.addAll(tasksServices.tasks);
     super.onInit();
@@ -18,7 +20,7 @@ class MySearchController extends GetxController {
 
   void searchByString(String search) {
     if (search.isEmpty) {
-      searchTasks = filtertask;
+      searchTasks.value = filtertask;
     } else {
       searchTasks.value = filtertask
           .where((element) => element.title
